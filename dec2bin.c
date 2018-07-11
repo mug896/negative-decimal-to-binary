@@ -134,16 +134,17 @@ void convert( long num, int size ) {
 
 void usage() {
 
-    puts("\n\
+    fputs( "\n\
  This is a decimal to binary converter.\n\
- Enter a decimal number to convert.    \n" );
+ Enter a decimal number to convert.    \n\n"
+    , stderr );
 
     exit(EXIT_FAILURE);
 }
 
 void err_msg() {
 
-    fputs("\n\
+    fputs( "\n\
  Error: Maximum (signed, unsigned) long type allowed.\n\n"
     , stderr );
 

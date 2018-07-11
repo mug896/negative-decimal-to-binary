@@ -1,0 +1,26 @@
+
+Convert {positive|negative} decimal number to binary with space delimiter
+
+
+```bash
+# Positive number
+$ ./dec2bin 123456789
+ 00000111 01011011 11001101 00010101
+
+# Negative number
+$ ./dec2bin -123456789
+ 11111000 10100100 00110010 11101011
+
+# ULONG_MAX
+$ ./dec2bin 18446744073709551615
+ 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111
+
+# LONG_MIN
+$ ./dec2bin -9223372036854775808
+ 10000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+
+# Out of range
+$ ./dec2bin -9223372036854775809
+
+ Error: Maximum (signed, unsigned) long type allowed.
+```

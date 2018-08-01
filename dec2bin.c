@@ -164,7 +164,7 @@ int main( int argc, char *argv[] )
 
         long argNum = strtol( argv[1], NULL, 10 );
 
-        if ( errno == ERANGE) err_msg();
+        if ( errno ) err_msg();
 
         if ( argNum >= CHAR_MIN )
             convert( argNum, BS_CHAR );
@@ -182,7 +182,7 @@ int main( int argc, char *argv[] )
 
         unsigned long argNum = strtoul( argv[1], NULL, 10 );
 
-        if ( errno == ERANGE ) err_msg();
+        if ( errno ) err_msg();
 
         if ( argNum <= UCHAR_MAX )
             convert( argNum, BS_CHAR );

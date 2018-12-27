@@ -1,5 +1,5 @@
 
-Convert {positive|negative} decimal number to binary with space delimiter
+Convert {positive|negative} integer number to binary with space delimiter
 
 
 ```bash

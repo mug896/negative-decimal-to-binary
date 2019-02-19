@@ -1,33 +1,12 @@
 /**************************************************************************
  
-endianness 는 multi-byte 에 적용되는 byte endian 외에 bit 단위 endian
-도 있습니다. 따라서 union 을 이용해 bit 값을 추출할 때는 little endian
-과 big endian 의 bit 값 순서를 각각 다르게 적용해야 합니다.
+long, int, short 같은 multi-byte values 를 byte 단위로 다룰땐 byte endian 이 
+적용되고, bit 단위로 다룰땐 bit endian 이 적용됩니다. 보통 둘은 같습니다.
+( byte endian 이 little endian 이면 bit endian 도 little endian )
+따라서 union 을 이용해 bit 단위로 값을 추출할 경우 little endian 과 big endian 
+의 bit 값 순서를 각각 다르게 적용해야 합니다.
 
 https://www.linuxjournal.com/article/6788
-
-Bit order usually follows the same endianness as the byte order for a given 
-computer system. That is, in a big endian system the most significant bit is
-stored at the lowest bit address; in a little endian system, 
-the least significant bit is stored at the lowest bit address.
-
-Here is how we would write the integer 0x0a0b0c0d for both big endian and 
-little endian systems, according to the rule above:
-   
-   
-Write Integer for Big Endian System
-
-byte  addr       0         1       2        3
-bit  offset  01234567 01234567 01234567 01234567
-     binary  00001010 00001011 00001100 00001101
-        hex     0a       0b      0c        0d
-
-Write Integer for Little Endian System
-
-byte  addr      3         2       1        0
-bit  offset  76543210 76543210 76543210 76543210
-     binary  00001010 00001011 00001100 00001101
-        hex     0a       0b      0c        0d
 
 ****************************************************************************/
 

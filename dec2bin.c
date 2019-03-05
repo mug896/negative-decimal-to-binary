@@ -15,6 +15,13 @@ https://www.linuxjournal.com/article/6788
 #include <errno.h>
 #include <limits.h>
 
+/*
+ *  little endian will be : 1
+ *     big endian will be : 0
+ */
+const int i = 1;
+#define is_little_endian() ( *(char*)&i )
+
 #define BS_CHAR   sizeof(char)
 #define BS_SHORT  sizeof(short)
 #define BS_INT    sizeof(int)
@@ -47,17 +54,6 @@ union {
         unsigned char b8 : 1;
     } m;
 } U;
-
-/*
- *  little endian will return : 1
- *     big endian will return : 0
- */
-int check_endian()
-{
-    unsigned int x = 1;
-    char *c = (char*) &x;
-    return *c;
-}
 
 void print_binary_big( char ch ) {
 
@@ -93,14 +89,11 @@ void convert( long num, int size ) {
 
     char *arr = (char*) &num;
 
-    if ( check_endian() ) {
-
+    if ( is_little_endian() ) {
         /* little endian */
         for ( int i = size - 1 ; i >= 0; i-- )
             print_binary_little( arr[i] );
-
     } else {
-
         /* big endian */
         int j = BS_LONG - size;
         for ( int i = 0; i < size; i++, j++ ) {

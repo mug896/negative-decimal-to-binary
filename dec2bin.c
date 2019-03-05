@@ -22,11 +22,6 @@ https://www.linuxjournal.com/article/6788
 const int i = 1;
 #define is_little_endian() ( *(char*)&i )
 
-#define BS_CHAR   sizeof(char)
-#define BS_SHORT  sizeof(short)
-#define BS_INT    sizeof(int)
-#define BS_LONG   sizeof(long)
-
 /*
 byte 값이 00000001 일 경우 endian 에 따라 다르게 저장됩니다.
 
@@ -95,7 +90,7 @@ void convert( long num, int size ) {
             print_binary_little( arr[i] );
     } else {
         /* big endian */
-        int j = BS_LONG - size;
+        int j = sizeof(long) - size;
         for ( int i = 0; i < size; i++, j++ ) {
             print_binary_big( arr[j] );
         }
@@ -139,16 +134,16 @@ int main( int argc, char *argv[] )
         if ( errno ) err_msg();
 
         if ( argNum >= CHAR_MIN )
-            convert( argNum, BS_CHAR );
+            convert( argNum, sizeof(char) );
 
         else if ( argNum >= SHRT_MIN )
-            convert( argNum, BS_SHORT );
+            convert( argNum, sizeof(short) );
 
         else if ( argNum >= INT_MIN )
-            convert( argNum, BS_INT );
+            convert( argNum, sizeof(int) );
 
         else if ( argNum >= LONG_MIN )
-            convert( argNum, BS_LONG );
+            convert( argNum, sizeof(long) );
 
     } else {
 
@@ -157,16 +152,16 @@ int main( int argc, char *argv[] )
         if ( errno ) err_msg();
 
         if ( argNum <= UCHAR_MAX )
-            convert( argNum, BS_CHAR );
+            convert( argNum, sizeof(char) );
 
         else if ( argNum <= USHRT_MAX )
-            convert( argNum, BS_SHORT );
+            convert( argNum, sizeof(short) );
 
         else if ( argNum <= UINT_MAX )
-            convert( argNum, BS_INT );
+            convert( argNum, sizeof(int) );
 
         else if ( argNum <= ULONG_MAX )
-            convert( argNum, BS_LONG );
+            convert( argNum, sizeof(long) );
 
     }
 

@@ -23,7 +23,7 @@ const int i = 1;
 #define is_little_endian() ( *(char*)&i )
 
 /*
-byte 값이 00000001 일 경우 endian 에 따라 다르게 저장됩니다.
+byte 값이 00000001 일 경우 endian 에 따라 bit 값이 다르게 저장됩니다.
 
 big endian 은 
 

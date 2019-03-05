@@ -86,7 +86,7 @@ void convert( long num, int size ) {
 
     if ( is_little_endian() ) {
         /* little endian */
-        for ( int i = size - 1 ; i >= 0; i-- )
+        for ( int i = size - 1; i >= 0; i-- )
             print_binary_little( arr[i] );
     } else {
         /* big endian */

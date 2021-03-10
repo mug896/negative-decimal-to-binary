@@ -50,11 +50,10 @@ union {
     } m;
 } U;
 
-void print_binary_big( char ch ) {
-
+void print_binary_big (char ch) 
+{
     U.ch = ch;
-
-    printf(" %d%d%d%d%d%d%d%d"
+    printf (" %d%d%d%d%d%d%d%d"
             ,U.m.b1
             ,U.m.b2
             ,U.m.b3
@@ -65,11 +64,10 @@ void print_binary_big( char ch ) {
             ,U.m.b8 );
 }
 
-void print_binary_little( char ch ) {
-
+void print_binary_little (char ch)
+{
     U.ch = ch;
-
-    printf(" %d%d%d%d%d%d%d%d"
+    printf (" %d%d%d%d%d%d%d%d"
             ,U.m.b8
             ,U.m.b7
             ,U.m.b6
@@ -80,88 +78,85 @@ void print_binary_little( char ch ) {
             ,U.m.b1 );
 }
 
-void convert( long num, int size ) {
+void convert (long num, int size)
+{
+    char *arr = (char *) &num;
 
-    char *arr = (char*) &num;
-
-    if ( is_little_endian() ) {
+    if (is_little_endian()) {
         /* little endian */
-        for ( int i = size - 1; i >= 0; i-- )
-            print_binary_little( arr[i] );
-    } else {
+        for (int i = size - 1; i >= 0; i--)
+            print_binary_little (arr[i]);
+    } 
+    else {
         /* big endian */
         int j = sizeof(long) - size;
-        for ( int i = 0; i < size; i++, j++ ) {
-            print_binary_big( arr[j] );
-        }
+        for (int i = 0; i < size; i++, j++)
+            print_binary_big (arr[j]);
     }
-
-    putchar('\n');
+    putchar ('\n');
 }
 
-void usage() {
-
-    fputs( "\n\
+void usage () 
+{
+    fputs ("\n\
  This is a decimal to binary converter.\n\
  Enter a decimal number to convert.    \n\n"
-    , stderr );
+    , stderr);
 
-    exit(EXIT_FAILURE);
+    exit (EXIT_FAILURE);
 }
 
-void err_msg() {
-
-    fputs( "\n\
+void err_msg() 
+{
+    fputs ("\n\
  Error: Maximum (signed, unsigned) long type allowed.\n\n"
-    , stderr );
+    , stderr);
 
-    exit(EXIT_FAILURE);
+    exit (EXIT_FAILURE);
 }
 
-
-
-int main( int argc, char *argv[] )
+int main (int argc, char *argv[])
 {
 
-    if ( argc == 1 ) usage();
+    if (argc == 1) usage();
 
-    char signChar = argv[1][0];
+    char sign_char = argv[1][0];
 
-    if ( signChar == '-' ) {
+    if (sign_char == '-') {
 
-        long argNum = strtol( argv[1], NULL, 10 );
+        long arg_num = strtol (argv[1], NULL, 10);
 
-        if ( errno ) err_msg();
+        if (errno) err_msg();
 
-        if ( argNum >= CHAR_MIN )
-            convert( argNum, sizeof(char) );
+        if (arg_num >= CHAR_MIN)
+            convert (arg_num, sizeof (char));
 
-        else if ( argNum >= SHRT_MIN )
-            convert( argNum, sizeof(short) );
+        else if (arg_num >= SHRT_MIN)
+            convert (arg_num, sizeof (short));
 
-        else if ( argNum >= INT_MIN )
-            convert( argNum, sizeof(int) );
+        else if (arg_num >= INT_MIN)
+            convert (arg_num, sizeof (int));
 
-        else if ( argNum >= LONG_MIN )
-            convert( argNum, sizeof(long) );
+        else if (arg_num >= LONG_MIN)
+            convert (arg_num, sizeof (long));
 
     } else {
 
-        unsigned long argNum = strtoul( argv[1], NULL, 10 );
+        unsigned long arg_num = strtoul (argv[1], NULL, 10);
 
-        if ( errno ) err_msg();
+        if (errno) err_msg();
 
-        if ( argNum <= UCHAR_MAX )
-            convert( argNum, sizeof(char) );
+        if (arg_num <= UCHAR_MAX)
+            convert (arg_num, sizeof (char));
 
-        else if ( argNum <= USHRT_MAX )
-            convert( argNum, sizeof(short) );
+        else if (arg_num <= USHRT_MAX)
+            convert (arg_num, sizeof (short));
 
-        else if ( argNum <= UINT_MAX )
-            convert( argNum, sizeof(int) );
+        else if (arg_num <= UINT_MAX)
+            convert (arg_num, sizeof (int));
 
-        else if ( argNum <= ULONG_MAX )
-            convert( argNum, sizeof(long) );
+        else if (arg_num <= ULONG_MAX)
+            convert (arg_num, sizeof (long));
 
     }
 
